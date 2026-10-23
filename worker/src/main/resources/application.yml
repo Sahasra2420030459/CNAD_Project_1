@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: video-platform-worker
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:local}
+
+worker:
+  id: ${WORKER_ID:worker-node-1}
+  poll-interval-ms: ${WORKER_POLL_INTERVAL_MS:3000}
+  ffmpeg:
+    path: ${FFMPEG_PATH:ffmpeg}
+    simulation-mode: ${WORKER_FFMPEG_SIMULATION_MODE:auto}
+    timeout-seconds: ${FFMPEG_TIMEOUT_SECONDS:1800}
+
+logging:
+  level:
+    root: INFO
+    com.videoplatform.worker: DEBUG

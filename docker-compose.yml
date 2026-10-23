@@ -1,0 +1,102 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: videoplatform-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-rootpassword}
+      MYSQL_DATABASE: ${DB_NAME:-videoplatform}
+      MYSQL_USER: ${DB_USERNAME:-videouser}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-rootpassword}
+    ports:
+      - "${DB_PORT:-3306}:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./backend/src/main/resources/db/schema.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_PASSWORD:-rootpassword}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - video-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: videoplatform-backend
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    ports:
+      - "${PORT_BACKEND:-8080}:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: ${DB_NAME:-videoplatform}
+      DB_USERNAME: ${DB_USERNAME:-videouser}
+      DB_PASSWORD: ${DB_PASSWORD:-rootpassword}
+      DB_USE_SSL: "false"
+      STORAGE_TYPE: ${STORAGE_TYPE:-local}
+      LOCAL_STORAGE_PATH: /app/uploads
+      QUEUE_TYPE: ${QUEUE_TYPE:-local}
+      JWT_SECRET: ${JWT_SECRET:-404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}
+    volumes:
+      - shared_uploads:/app/uploads
+    networks:
+      - video-network
+
+  worker:
+    build:
+      context: ./worker
+      dockerfile: Dockerfile
+    container_name: videoplatform-worker
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_started
+      mysql:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: ${DB_NAME:-videoplatform}
+      DB_USERNAME: ${DB_USERNAME:-videouser}
+      DB_PASSWORD: ${DB_PASSWORD:-rootpassword}
+      DB_USE_SSL: "false"
+      STORAGE_TYPE: ${STORAGE_TYPE:-local}
+      LOCAL_STORAGE_PATH: /app/uploads
+      QUEUE_TYPE: ${QUEUE_TYPE:-local}
+      WORKER_FFMPEG_SIMULATION_MODE: "false"
+      WORKER_POLL_INTERVAL_MS: 3000
+    volumes:
+      - shared_uploads:/app/uploads
+    networks:
+      - video-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: videoplatform-frontend
+    restart: unless-stopped
+    ports:
+      - "${PORT_FRONTEND:-3000}:80"
+    depends_on:
+      - backend
+    networks:
+      - video-network
+
+networks:
+  video-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
+  shared_uploads:
