@@ -1,0 +1,17 @@
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node / Python cache leftovers
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+*.db
+

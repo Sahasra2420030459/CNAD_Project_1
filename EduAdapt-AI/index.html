@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduAdapt-AI – Personalized Student Learning Platform</title>
+  
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Custom Styling -->
+  <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top border-bottom border-secondary-subtle">
+    <div class="container-fluid px-lg-4">
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <i class="bi bi-mortarboard-fill text-primary me-2 fs-4"></i>
+        <span>EduAdapt<span class="brand-accent">-AI</span></span>
+      </a>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <!-- Guest Navigation Links -->
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center gap-2 auth-guest-only">
+          <li class="nav-item">
+            <a class="nav-link" href="#coursesSection">Courses</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#featuresSection">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-outline-light btn-sm px-3" href="#loginCard">Log In</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-primary btn-sm px-3" href="register.html">Register Free</a>
+          </li>
+        </ul>
+
+        <!-- Authenticated User Navigation Links -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 auth-user-only d-none">
+          <li class="nav-item">
+            <a class="nav-link" href="dashboard.html"><i class="bi bi-speedometer2 me-1"></i> Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="subjects.html"><i class="bi bi-collection me-1"></i> Subjects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="study-material.html"><i class="bi bi-book me-1"></i> Study Material</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="assignments.html"><i class="bi bi-pencil-square me-1"></i> Assignments</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="chatbot.html"><i class="bi bi-robot me-1"></i> AI Tutor</a>
+          </li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-3 auth-user-only d-none">
+          <span class="text-light small">Welcome, <strong class="current-user-name">Student</strong>!</span>
+          <a href="dashboard.html" class="btn btn-outline-light btn-sm">My Dashboard</a>
+          <button type="button" class="btn btn-sm btn-outline-danger btn-logout-trigger">Sign Out</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero & Login Banner -->
+  <header class="hero-banner">
+    <div class="hero-glow"></div>
+    <div class="container py-4">
+      <div class="row align-items-center g-5">
+        
+        <div class="col-lg-7 text-white">
+          <span class="badge bg-primary-subtle text-primary border border-primary mb-3 px-3 py-2 text-uppercase">
+            <i class="bi bi-stars me-1"></i> Adaptive CS Mastery Platform
+          </span>
+          <h1 class="display-4 fw-bold lh-sm mb-3">Master Computer Science With Personalized Learning Paths</h1>
+          <p class="lead text-light-50 mb-4" style="color: #cbd5e1;">
+            EduAdapt-AI guides you from fundamental syntax to production-grade algorithms. Advance through 
+            <strong>Easy</strong>, <strong>Medium</strong>, and <strong>Complex</strong> mastery tracks, validate understanding with comprehensive assessments, and get 24/7 rule-based AI tutoring.
+          </p>
+
+          <div class="row g-3 mb-4">
+            <div class="col-sm-6">
+                <div class="d-flex align-items-center gap-2">
+                    <i class="bi bi-check-circle-fill text-success fs-5"></i>
+                    <span>4 Complete Computer Science Tracks</span>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="d-flex align-items-center gap-2">
+                    <i class="bi bi-check-circle-fill text-success fs-5"></i>
+                    <span>120 Structured Topics (No Filler)</span>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="d-flex align-items-center gap-2">
+                    <i class="bi bi-check-circle-fill text-success fs-5"></i>
+                    <span>120 Graded Practice MCQs</span>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="d-flex align-items-center gap-2">
+                    <i class="bi bi-check-circle-fill text-success fs-5"></i>
+                    <span>Frontend-Only & Zero Configuration</span>
+                </div>
+            </div>
+          </div>
+
+          <div class="d-flex gap-3">
+            <a href="register.html" class="btn btn-primary btn-lg px-4 shadow-sm">
+              <i class="bi bi-rocket-takeoff-fill me-2"></i> Start Learning Now
+            </a>
+            <a href="#coursesSection" class="btn btn-outline-light btn-lg px-4">
+              Explore Catalog
+            </a>
+          </div>
+        </div>
+
+        <!-- Student Login Card -->
+        <div class="col-lg-5" id="loginCard">
+          <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-body p-4 p-md-5">
+              <div class="text-center mb-4">
+                <div class="d-inline-flex p-3 rounded-circle bg-primary-subtle text-primary mb-2">
+                  <i class="bi bi-person-badge fs-2"></i>
+                </div>
+                <h3 class="fw-bold text-dark">Student Sign In</h3>
+                <p class="text-muted small">Access your enrolled courses and learning progress</p>
+              </div>
+
+              <!-- Error Alert -->
+              <div id="loginErrorAlert" class="alert alert-danger d-none py-2 px-3 small" role="alert"></div>
+
+              <!-- Login Form -->
+              <form id="loginForm">
+                <div class="mb-3">
+                  <label for="loginEmail" class="form-label small fw-semibold text-dark">Email Address</label>
+                  <div class="input-group">
+                    <span class="input-group-text bg-light text-muted"><i class="bi bi-envelope"></i></span>
+                    <input type="email" class="form-control" id="loginEmail" placeholder="student@example.com" required>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <label for="loginPassword" class="form-label small fw-semibold text-dark mb-0">Password</label>
+                  </div>
+                  <div class="input-group mt-1">
+                    <span class="input-group-text bg-light text-muted"><i class="bi bi-lock"></i></span>
+                    <input type="password" class="form-control" id="loginPassword" placeholder="Enter your password" required>
+                    <button class="btn btn-outline-secondary password-toggle-btn" type="button" data-target="loginPassword" title="Toggle password visibility">
+                      <i class="bi bi-eye"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold mb-3">
+                  <i class="bi bi-box-arrow-in-right me-1"></i> Sign In to Dashboard
+                </button>
+
+                <!-- One-Click Demo Credentials Button -->
+                <button type="button" id="useDemoUserBtn" class="btn btn-outline-secondary w-100 py-2 btn-sm mb-3">
+                  <i class="bi bi-magic me-1"></i> Autofill Demo Student (Alex Morgan)
+                </button>
+
+                <div class="text-center small text-muted">
+                  New to EduAdapt-AI? <a href="register.html" class="text-primary fw-semibold text-decoration-none">Create a Free Account</a>
+                </div>
+              </form>
+
+              <hr class="my-4">
+              <div class="alert alert-info border-0 p-2 mb-0 small text-center" style="font-size: 0.75rem;">
+                <i class="bi bi-info-circle me-1"></i> <strong>Client-Side Demo Note:</strong> Data is persisted in your browser's <code>localStorage</code>. No backend server or database is required.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Courses Preview Section -->
+  <section class="py-5" id="coursesSection">
+    <div class="container py-4">
+      <div class="text-center mb-5">
+        <span class="badge bg-primary-subtle text-primary border border-primary px-3 py-2 text-uppercase mb-2">Curriculum Catalog</span>
+        <h2 class="fw-bold">Four Comprehensive Learning Tracks</h2>
+        <p class="text-muted mx-auto" style="max-width: 650px;">
+          Each track provides 30 in-depth topics divided across Easy, Medium, and Complex tiers. Complete quizzes to unlock higher tiers.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Python -->
+        <div class="col-md-6 col-lg-3">
+          <div class="card h-100 border-0 shadow-sm border-top border-4 border-primary card-hover-lift">
+            <div class="card-body p-4 text-center">
+              <div class="p-3 rounded-circle bg-primary-subtle text-primary fs-1 mx-auto mb-3" style="width: 70px; height: 70px; display: flex; align-items: center; justify-content: center;">
+                <i class="bi bi-filetype-py"></i>
+              </div>
+              <h5 class="fw-bold mb-2">Python Programming</h5>
+              <p class="text-secondary small mb-3">Syntax, functional comprehensions, OOP, decorators, generators, and complexity analysis.</p>
+              <div class="badge bg-light text-dark border mb-3">30 Topics &bull; 3 Levels</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Java -->
+        <div class="col-md-6 col-lg-3">
+          <div class="card h-100 border-0 shadow-sm border-top border-4 border-danger card-hover-lift">
+            <div class="card-body p-4 text-center">
+              <div class="p-3 rounded-circle bg-danger-subtle text-danger fs-1 mx-auto mb-3" style="width: 70px; height: 70px; display: flex; align-items: center; justify-content: center;">
+                <i class="bi bi-filetype-java"></i>
+              </div>
+              <h5 class="fw-bold mb-2">Java Programming</h5>
+              <p class="text-secondary small mb-3">JVM architecture, OOP encapsulation, Streams, multithreading, and memory garbage collection.</p>
+              <div class="badge bg-light text-dark border mb-3">30 Topics &bull; 3 Levels</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DBMS -->
+        <div class="col-md-6 col-lg-3">
+          <div class="card h-100 border-0 shadow-sm border-top border-4 border-success card-hover-lift">
+            <div class="card-body p-4 text-center">
+              <div class="p-3 rounded-circle bg-success-subtle text-success fs-1 mx-auto mb-3" style="width: 70px; height: 70px; display: flex; align-items: center; justify-content: center;">
+                <i class="bi bi-database-fill"></i>
+              </div>
+              <h5 class="fw-bold mb-2">DBMS & SQL</h5>
+              <p class="text-secondary small mb-3">Relational modeling, SQL DDL/DML, Joins, 1NF to BCNF Normalization, and ACID transactions.</p>
+              <div class="badge bg-light text-dark border mb-3">30 Topics &bull; 3 Levels</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DSA -->
+        <div class="col-md-6 col-lg-3">
+          <div class="card h-100 border-0 shadow-sm border-top border-4 border-warning card-hover-lift">
+            <div class="card-body p-4 text-center">
+              <div class="p-3 rounded-circle bg-warning-subtle text-warning fs-1 mx-auto mb-3" style="width: 70px; height: 70px; display: flex; align-items: center; justify-content: center;">
+                <i class="bi bi-diagram-3-fill"></i>
+              </div>
+              <h5 class="fw-bold mb-2">Data Structures & Algo</h5>
+              <p class="text-secondary small mb-3">Big-O notation, trees, graphs, Dijkstra, Dynamic Programming, and Divide-and-Conquer.</p>
+              <div class="badge bg-light text-dark border mb-3">30 Topics &bull; 3 Levels</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-5 bg-white border-top border-bottom" id="featuresSection">
+    <div class="container py-4">
+      <div class="text-center mb-5">
+        <span class="badge bg-info-subtle text-info border border-info px-3 py-2 text-uppercase mb-2">Platform Features</span>
+        <h2 class="fw-bold">How EduAdapt-AI Empowers Students</h2>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="p-4 rounded-4 bg-light border h-100">
+            <i class="bi bi-lock-fill fs-2 text-primary mb-3 d-block"></i>
+            <h5 class="fw-bold">Progression Lock Gating</h5>
+            <p class="text-muted small mb-0">Easy tier is unlocked initially. Scoring 70% or higher on assessments automatically unlocks Medium and Complex tiers.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-4 rounded-4 bg-light border h-100">
+            <i class="bi bi-robot fs-2 text-primary mb-3 d-block"></i>
+            <h5 class="fw-bold">24/7 Local Rule-Based AI Tutor</h5>
+            <p class="text-muted small mb-0">Ask concept questions, request assignment hints without spoiling answers, debug common runtime errors, or get interactive quizzes.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-4 rounded-4 bg-light border h-100">
+            <i class="bi bi-graph-up-arrow fs-2 text-primary mb-3 d-block"></i>
+            <h5 class="fw-bold">Live Progress Tracking</h5>
+            <p class="text-muted small mb-0">Personalized dashboard computes your lessons completed, assessment scores, and recent topics via browser localStorage.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row g-4 mb-4">
+        <div class="col-lg-5">
+          <div class="d-flex align-items-center mb-2">
+            <i class="bi bi-mortarboard-fill text-primary me-2 fs-4"></i>
+            <span class="fw-bold fs-5 text-white">EduAdapt<span class="brand-accent">-AI</span></span>
+          </div>
+          <p class="small text-muted mb-0">
+            A static, frontend-only personalized student learning platform built with HTML5, CSS3, JavaScript, and Bootstrap 5.
+          </p>
+        </div>
+        <div class="col-lg-3 col-6">
+          <h6 class="text-white fw-bold mb-3">Core Subjects</h6>
+          <ul class="list-unstyled small mb-0">
+            <li class="mb-1"><a href="subjects.html">Python Programming</a></li>
+            <li class="mb-1"><a href="subjects.html">Java Programming</a></li>
+            <li class="mb-1"><a href="subjects.html">DBMS & SQL</a></li>
+            <li><a href="subjects.html">Data Structures & Algo</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-6">
+          <h6 class="text-white fw-bold mb-3">Academic Note</h6>
+          <p class="small text-muted mb-0">
+            Demonstration version designed for static hosting (GitHub Pages, Netlify, Vercel). No backend APIs or paid subscriptions required.
+          </p>
+        </div>
+      </div>
+      <div class="border-top border-secondary pt-3 text-center small text-muted">
+        &copy; 2026 EduAdapt-AI Platform. Frontend-Only Architecture.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5 Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Application Scripts -->
+  <script src="assets/js/study-content.js"></script>
+  <script src="assets/js/assignment-data.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script src="assets/js/app.js"></script>
+
+  <!-- Page Logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // If already logged in, redirect to dashboard
+        if (window.Auth && window.Auth.getCurrentUser()) {
+            // Already logged in
+            window.Auth.updateNavUserInfo();
+        }
+
+        const loginForm = document.getElementById('loginForm');
+        const loginErrorAlert = document.getElementById('loginErrorAlert');
+        const demoUserBtn = document.getElementById('useDemoUserBtn');
+
+        // Autofill demo user
+        if (demoUserBtn) {
+            demoUserBtn.addEventListener('click', () => {
+                document.getElementById('loginEmail').value = 'alex@eduadapt.io';
+                document.getElementById('loginPassword').value = 'password123';
+                if (loginErrorAlert) loginErrorAlert.classList.add('d-none');
+            });
+        }
+
+        // Form Submit
+        if (loginForm) {
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+
+                const res = window.Auth.login(email, password);
+                if (res.success) {
+                    window.location.href = 'dashboard.html';
+                } else {
+                    if (loginErrorAlert) {
+                        loginErrorAlert.textContent = res.message;
+                        loginErrorAlert.classList.remove('d-none');
+                    }
+                }
+            });
+        }
+    });
+  </script>
+</body>
+</html>

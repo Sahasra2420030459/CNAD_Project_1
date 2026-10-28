@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}403 Forbidden – EduAdapt-AI{% endblock %}
+
+{% block content %}
+<div class="container py-5 text-center">
+  <div class="row justify-content-center">
+    <div class="col-md-7 col-lg-5">
+      <div class="card border-0 shadow-sm p-5 rounded-4 bg-white">
+        <div class="display-1 text-danger fw-bold mb-2">403</div>
+        <h4 class="fw-bold mb-2">Access Denied / Level Locked</h4>
+        <p class="text-muted small mb-4">
+          You do not have permission to access this resource or curriculum tier. Complete prerequisite foundational assessments ($\ge 70\%$) to unlock this level.
+        </p>
+        <div class="d-grid gap-2">
+          <a href="{{ url_for('learning.dashboard') }}" class="btn btn-primary fw-semibold">
+            <i class="bi bi-speedometer2 me-1"></i> Return to Dashboard
+          </a>
+          <a href="{{ url_for('learning.subjects') }}" class="btn btn-outline-secondary">
+            Browse Enrolled Subjects
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
