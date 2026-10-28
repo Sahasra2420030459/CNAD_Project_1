@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    url: ${JDBC_DATABASE_URL:jdbc:mysql://${DB_HOST}:${DB_PORT:3306}/${DB_NAME:videoplatform}?useSSL=${DB_USE_SSL:true}&requireSSL=${DB_REQUIRE_SSL:false}&verifyServerCertificate=${DB_VERIFY_SERVER_CERT:false}&allowPublicKeyRetrieval=true&serverTimezone=UTC}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 5
+      minimum-idle: 1
+      idle-timeout: 600000
+      max-lifetime: 1800000
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+
+storage:
+  type: ${STORAGE_TYPE:local}
+  local:
+    base-path: ${LOCAL_STORAGE_PATH:./uploads}
+
+queue:
+  type: ${QUEUE_TYPE:local}
+
+worker:
+  ffmpeg:
+    simulation-mode: ${WORKER_FFMPEG_SIMULATION_MODE:auto}

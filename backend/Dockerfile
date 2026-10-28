@@ -1,9 +1,8 @@
-
 FROM maven:3.9.6-eclipse-temurin-21 AS build
 WORKDIR /app
 
-COPY backend/pom.xml ./pom.xml
-COPY backend/src ./src
+COPY pom.xml ./pom.xml
+COPY src ./src
 
 RUN mvn clean package -DskipTests
 
@@ -14,4 +13,4 @@ COPY --from=build /app/target/*.jar app.jar
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "app.jar"]

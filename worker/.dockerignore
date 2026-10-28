@@ -1,0 +1,8 @@
+target/
+uploads/
+data/
+*.log
+.env
+.idea/
+.vscode/
+*.class

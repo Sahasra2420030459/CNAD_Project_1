@@ -1,0 +1,12 @@
+**/.git
+**/.gitignore
+**/target/
+**/node_modules/
+**/build/
+**/uploads/
+**/data/
+**/*.log
+**/.env
+**/.idea/
+**/.vscode/
+**/*.class
