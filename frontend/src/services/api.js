@@ -1,8 +1,5 @@
 import axios from 'axios';
 
-// Read API Base URL from configurable environment variable, defaulting to standard backend port
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080/api';
-
 // In-memory token storage (Strictly NO localStorage per security requirements)
 let inMemoryToken = null;
 
@@ -14,16 +11,54 @@ export const getAuthToken = () => {
   return inMemoryToken;
 };
 
+export const normalizeApiUrl = (url) => {
+  if (!url || typeof url !== 'string') return 'http://localhost:8080/api';
+  let cleaned = url.trim();
+  if (!cleaned.startsWith('http://') && !cleaned.startsWith('https://')) {
+    cleaned = 'https://' + cleaned;
+  }
+  cleaned = cleaned.replace(/\/+$/, '');
+  if (!cleaned.endsWith('/api')) {
+    cleaned = cleaned + '/api';
+  }
+  return cleaned;
+};
+
+export const getApiBaseUrl = () => {
+  try {
+    const custom = typeof window !== 'undefined' ? localStorage.getItem('custom_api_base_url') : null;
+    if (custom) return normalizeApiUrl(custom);
+  } catch (e) {
+    // Ignore storage errors
+  }
+  return normalizeApiUrl(process.env.REACT_APP_API_BASE_URL);
+};
+
+export const setCustomApiBaseUrl = (url) => {
+  try {
+    if (typeof window !== 'undefined') {
+      if (url && url.trim()) {
+        localStorage.setItem('custom_api_base_url', normalizeApiUrl(url));
+      } else {
+        localStorage.removeItem('custom_api_base_url');
+      }
+    }
+  } catch (e) {
+    // Ignore storage errors
+  }
+};
+
 const apiClient = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: getApiBaseUrl(),
   headers: {
     'Accept': 'application/json',
   },
 });
 
-// Request interceptor: Attach JWT Bearer token from in-memory state
+// Request interceptor: Dynamically set baseURL and attach JWT Bearer token
 apiClient.interceptors.request.use(
   (config) => {
+    config.baseURL = getApiBaseUrl();
     if (inMemoryToken) {
       config.headers.Authorization = `Bearer ${inMemoryToken}`;
     }
