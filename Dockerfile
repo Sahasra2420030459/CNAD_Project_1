@@ -11,7 +11,12 @@ RUN mvn clean package -DskipTests --batch-mode
 FROM eclipse-temurin:21-jre-jammy
 WORKDIR /app
 
+RUN mkdir -p /app/data /app/uploads
+
 COPY --from=build /app/target/*.jar app.jar
+
+ENV SPRING_PROFILES_ACTIVE=h2
+ENV PORT=8080
 
 EXPOSE 8080
 

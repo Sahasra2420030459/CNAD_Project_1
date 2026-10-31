@@ -8,6 +8,10 @@ Thumbs.db
 *.swp
 *.swo
 
+# Maven build targets
+target/
+**/target/
+
 # Node / Python cache leftovers
 node_modules/
 __pycache__/
@@ -15,3 +19,8 @@ __pycache__/
 .venv/
 *.db
 
+# Local runtime data & uploads
+data/
+uploads/
+**/uploads/
+**/data/
